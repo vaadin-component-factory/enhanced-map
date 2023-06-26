@@ -1,12 +1,12 @@
-# Template Addon for Vaadin Flow
+# Enhanced Map for Vaadin Flow
 
-This project is a template for building new Vaadin Flow addons
+This project is an extension of Vaadin Map component that includes geofencing capabilities.
 
-This component is part of Vaadin Component Factory
+This component is part of Vaadin Component Factory.
 
 ## Running the component demo
 Run from the command line:
-- `mvn  -pl vcf-template-demo -Pwar install jetty:run`
+- `mvn  -pl vcf-enhanced-map-demo -Pwar install jetty:run`
 
 Then navigate to `http://localhost:8080/`
 
@@ -26,15 +26,12 @@ To use the component in an application using maven,
 add the following dependency to your `pom.xml`:
 ```
 <dependency>
-    <groupId>com.vaadin.componentfactory</groupId>
-    <artifactId>vcf-template</artifactId>
+    <groupId>org.vaadin.addons.componentfactory</groupId>
+    <artifactId>vcf-enhanced-map</artifactId>
     <version>${component.version}</version>
 </dependency>
 ```
 
-## Flow documentation
-Documentation for flow can be found in [Flow documentation](https://vaadin.com/docs/v14/flow/overview).
-
 ## License
 
-Apache Licence 2
+Vaadin Commercial License
