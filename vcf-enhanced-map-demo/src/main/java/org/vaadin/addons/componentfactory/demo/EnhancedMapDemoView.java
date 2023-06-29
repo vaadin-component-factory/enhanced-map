@@ -1,18 +1,23 @@
 package org.vaadin.addons.componentfactory.demo;
 
+import com.vaadin.flow.component.HtmlComponent;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.map.Map;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
 import org.vaadin.addons.componentfactory.enhancedmap.EnhancedMap;
-
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.map.Map;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
 
 /**
  * View for {@link EnhancedMap} demo.
@@ -46,9 +51,9 @@ public class EnhancedMapDemoView extends VerticalLayout {
                 new Coordinate(1238809.9589261413,6044337.659220713),
                 });
         polygons.add(polygon);
-        map.loadPolygons(polygons);
-        
+        map.loadPolygons(polygons);        
         add(map);
+        
         Button remove = new Button("Remove polygons");
         remove.setDisableOnClick(true);
         Button draw = new Button("Draw polygons");
@@ -64,6 +69,31 @@ public class EnhancedMapDemoView extends VerticalLayout {
             ev.getSource().setEnabled(false);
             remove.setEnabled(true);
         });
-        add(new HorizontalLayout(draw,remove));
+        add(new HorizontalLayout(draw,remove)); 
+        
+        map.addNewPolygonListener(ev -> {
+        	Polygon newPolygon = ev.getPolygon();
+        	Coordinate[] coordinates = newPolygon.getCoordinates();
+        	Div message = new Div();
+        	message.add(new Text("New polygon created with coordinates:"));
+        	for (Coordinate c : coordinates) {
+        		message.add(new HtmlComponent("br"));
+	        	message.add(c.toString());	
+			}
+        	
+        	Notification notification = new Notification();
+        	
+        	Button closeButton = new Button(new Icon(VaadinIcon.CLOSE_SMALL));
+        	closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE, ButtonVariant.LUMO_CONTRAST);
+        	closeButton.addClickListener(event -> {
+        	    notification.close();
+        	});
+
+        	HorizontalLayout layout = new HorizontalLayout(message, closeButton);
+        	layout.setAlignItems(Alignment.CENTER);
+        	
+        	notification.add(layout);
+        	notification.open();
+        });
     }
 }

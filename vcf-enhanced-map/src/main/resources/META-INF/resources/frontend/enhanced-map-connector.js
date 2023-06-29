@@ -62,7 +62,7 @@ window.enhancedMap = {
             type: 'Polygon'
         });
         draw.on('drawend', function(event) {
-            vaadinWCmap.$server.sendVectorLayer(event.feature.getGeometry().getCoordinates());
+            vaadinWCmap.$server.sendGeometryCoordinates(event.feature.getGeometry().getCoordinates());
         });
         snap = new Snap({ source: source });
         map.addInteraction(draw);
