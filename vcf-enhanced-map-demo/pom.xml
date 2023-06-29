@@ -62,7 +62,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
         </dependency>
     </dependencies>
 
@@ -91,7 +90,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.1</version>
             </plugin>
             <!-- We use jetty plugin, replace it with your favourite developing servlet container -->
             <plugin>
