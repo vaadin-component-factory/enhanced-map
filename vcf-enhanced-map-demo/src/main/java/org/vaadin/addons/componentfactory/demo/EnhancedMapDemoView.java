@@ -41,7 +41,7 @@ public class EnhancedMapDemoView extends VerticalLayout {
                 
         // Create a map, center viewport on New York using
         // coordinates in EPSG:3857 projection
-        map = new EnhancedMap(options);
+        map = new EnhancedMap();
         map.setSizeFull();
         map.setZoom(5);
         map.setCenter(new com.vaadin.flow.component.map.configuration.Coordinate(1238809.9589261413,6044337.659220713));
@@ -58,11 +58,14 @@ public class EnhancedMapDemoView extends VerticalLayout {
         map.loadPolygons(polygons);        
         add(map);
         
-        Button remove = new Button("Remove polygons");
+        Button remove = new Button("Remove polygon");
         remove.setDisableOnClick(true);
-        Button draw = new Button("Draw polygons");
+        Button draw = new Button("Draw polygon");
         draw.setDisableOnClick(true);
         draw.setEnabled(false);
+        Button removeAll = new Button("Remove all polygons");
+        removeAll.setDisableOnClick(true);
+        
         remove.addClickListener(ev->{
             map.setRemoveMode();
             ev.getSource().setEnabled(false);
@@ -72,8 +75,17 @@ public class EnhancedMapDemoView extends VerticalLayout {
             map.setDrawingMode();
             ev.getSource().setEnabled(false);
             remove.setEnabled(true);
+            removeAll.setEnabled(true);
+        });        
+        removeAll.addClickListener(ev-> {
+        	map.setRemoveMode();
+            map.clearPolygons();
+            ev.getSource().setEnabled(false);
+            draw.setEnabled(true);
+            remove.setEnabled(false);
         });
-        add(new HorizontalLayout(draw,remove)); 
+        
+        add(new HorizontalLayout(draw, remove, removeAll)); 
         
         map.addNewPolygonListener(ev -> {
         	Polygon newPolygon = ev.getPolygon();
