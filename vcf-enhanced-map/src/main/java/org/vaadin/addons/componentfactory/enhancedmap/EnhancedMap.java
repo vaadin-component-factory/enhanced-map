@@ -36,7 +36,7 @@ import org.locationtech.jts.geom.Polygon;
 @JsModule("./enhanced-map-connector.js")
 public class EnhancedMap extends Map {
 
-	private DrawingLayerOptions drawingLayerOptions;
+	private DrawingLayerOptions drawingLayerOptions = new DrawingLayerOptions();
 	private boolean attached = false;
 
 	public EnhancedMap() {
