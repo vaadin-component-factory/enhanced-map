@@ -43,6 +43,7 @@ window.enhancedMap = {
         map.addLayer(vector);
         map.sourceVectorSource = source;
         map.vectorVectorLayer = vector;
+        map.onePolygonOnly = parsedOptions.onePolygonOnly;
     },
 
     setDrawingInteractions: function (vaadinWCmap) {
@@ -63,6 +64,11 @@ window.enhancedMap = {
             source: source,
             type: 'Polygon'
         });
+        draw.on('drawstart', function() {
+			if(map.onePolygonOnly){
+				source.clear();	
+			}  			
+		});
         draw.on('drawend', function(event) {
             vaadinWCmap.$server.sendGeometryCoordinates(event.feature.getGeometry().getCoordinates());
         });
