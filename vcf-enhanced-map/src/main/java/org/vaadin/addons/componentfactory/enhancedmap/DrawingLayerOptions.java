@@ -9,6 +9,8 @@ public class DrawingLayerOptions {
 	public String strokeColor = "green";
 	public double strokeWidth = 2;
 	public boolean onePolygonOnly = false;
+	
+	public DrawingLayerOptions() {}
 		
 	public DrawingLayerOptions(String fillColor, String strokeColor, double strokeWidth) {
 		this.fillColor = fillColor;
