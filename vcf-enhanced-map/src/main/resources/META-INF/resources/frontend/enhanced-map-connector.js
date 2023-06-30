@@ -109,12 +109,7 @@ window.enhancedMap = {
     _clearPolygons: function(vaadinWCmap) {
 		let map = vaadinWCmap._configuration;
 		let source = map.sourceVectorSource;
-		
-		var features = source.getFeatures();
-		
-		features.forEach(function(feature) {
-		  source.removeFeature(feature);
-		});
+		source.clear();
 	},
     
     loadPolygon: function (vaadinWCmap, coordinateString) {
