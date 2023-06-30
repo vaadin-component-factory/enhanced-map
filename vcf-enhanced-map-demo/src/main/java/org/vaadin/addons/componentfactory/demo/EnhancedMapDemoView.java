@@ -17,6 +17,7 @@ import java.util.List;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
+import org.vaadin.addons.componentfactory.enhancedmap.DrawingLayerOptions;
 import org.vaadin.addons.componentfactory.enhancedmap.EnhancedMap;
 
 /**
@@ -35,9 +36,12 @@ public class EnhancedMapDemoView extends VerticalLayout {
         // Set user projection to EPSG:3857
         Map.setUserProjection("EPSG:3857");
         
+        // Define the needed options for the drawing layer (optional)
+        DrawingLayerOptions options = new DrawingLayerOptions("rgba(0,255,0,0.4)","purple", 3);
+                
         // Create a map, center viewport on New York using
         // coordinates in EPSG:3857 projection
-        map = new EnhancedMap("rgba(0,255,0,0.4)","purple", 3);
+        map = new EnhancedMap(options);
         map.setSizeFull();
         map.setZoom(5);
         map.setCenter(new com.vaadin.flow.component.map.configuration.Coordinate(1238809.9589261413,6044337.659220713));
@@ -94,6 +98,6 @@ public class EnhancedMapDemoView extends VerticalLayout {
         	
         	notification.add(layout);
         	notification.open();
-        });
+        });        
     }
 }

@@ -36,9 +36,7 @@ import org.locationtech.jts.geom.Polygon;
 @JsModule("./enhanced-map-connector.js")
 public class EnhancedMap extends Map {
 
-	private String fillColor = "rgba(0,255,0,0.4)";
-	private String strokeColor = "green";
-	private double strokeWidth = 2;
+	private DrawingLayerOptions drawingLayerOptions;
 	private boolean attached = false;
 
 	public EnhancedMap() {
@@ -46,20 +44,17 @@ public class EnhancedMap extends Map {
 		init();
 	}
 
-	public EnhancedMap(String fillColor, String strokeColor, double strokeWidth) {
+	public EnhancedMap(DrawingLayerOptions drawingLayerOptions) {
 		super();
-		this.fillColor = fillColor;
-		this.strokeColor = strokeColor;
-		this.strokeWidth = strokeWidth;
+		this.drawingLayerOptions = drawingLayerOptions;
 		init();
 	}
 
 	private void init() {
 		executeWhenAttached(() -> getElement().executeJs(
-				"enhancedMap.addDrawingLayer($0, $1, $2, $3); enhancedMap.setDrawingInteractions($0);", this, fillColor,
-				strokeColor, strokeWidth));
+				"enhancedMap.addDrawingLayer($0, $1); enhancedMap.setDrawingInteractions($0);", this, drawingLayerOptions.toJSON()));
 	}
-
+		
 	/**
 	 * Load the supplied polygons in the polygon layer
 	 * 
@@ -161,5 +156,5 @@ public class EnhancedMap extends Map {
 			getElement().addAttachListener(ev -> runnable.run());
 		}
 	}
-
+	
 }

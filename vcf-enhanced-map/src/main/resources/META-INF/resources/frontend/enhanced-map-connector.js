@@ -12,19 +12,21 @@ import Polygon from 'ol/geom/Polygon.js';
 
 window.enhancedMap = {
 
-    addDrawingLayer: function (vaadinWCmap, fillColor, strokeColor, strokeWidth) {
-        setTimeout(() => this._addDrawingLayer(vaadinWCmap, fillColor, strokeColor, strokeWidth))
+    addDrawingLayer: function (vaadinWCmap, drawningOptionsJson) {
+        setTimeout(() => this._addDrawingLayer(vaadinWCmap, drawningOptionsJson))
     },
 
-    _addDrawingLayer: function (vaadinWCmap, fillColor, strokeColor, strokeWidth) {
+    _addDrawingLayer: function (vaadinWCmap, drawningOptionsJson) {
         let map = vaadinWCmap._configuration;
+        
+        let parsedOptions = JSON.parse(drawningOptionsJson);
 
         const fill = new Fill({
-            color: fillColor,
+            color: parsedOptions.fillColor,
           });
           const stroke = new Stroke({
-            color: strokeColor,
-            width: strokeWidth,
+            color: parsedOptions.strokeColor,
+            width: parsedOptions.strokeWidth,
           });
           const styles = [
             new Style({
@@ -70,7 +72,7 @@ window.enhancedMap = {
         map.interactionDraw = draw;
         map.interactionSnap = snap;
     },
-
+  
     setRemovalInteractions: function (vaadinWCmap) {
         setTimeout(() => this._setRemovalInteractions(vaadinWCmap))
     },
