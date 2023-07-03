@@ -90,6 +90,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+			    <configuration>
+			        <failOnMissingWebXml>false</failOnMissingWebXml>
+			    </configuration>
             </plugin>
             <!-- We use jetty plugin, replace it with your favourite developing servlet container -->
             <plugin>
